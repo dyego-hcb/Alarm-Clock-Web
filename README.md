@@ -1,11 +1,76 @@
-# Alarm-Clock-Web
+# Repositório de Alarm Clock WEB
 
-Este repositório contém um projeto de despertador web, implementado utilizando HTML, CSS e JavaScript. O despertador permite definir um horário de alarme e reproduzir um som quando o horário definido é alcançado.
+Este repositório contém duas versões do código-fonte de um aplicativo de despertador web. O objetivo do aplicativo é fornecer uma interface simples para configurar alarmes e exibir a hora atual.
 
-O arquivo HTML (index.html) define a estrutura da página, incluindo um título, um relógio digital, seletores para configurar o horário do alarme e botões para definir e cancelar o alarme. Ele também faz referência a um arquivo CSS (styles.css) para estilizar os elementos da página e a um arquivo JavaScript (alarm_clock.js) que contém a lógica do despertador.
+## Versão 1
 
-O CSS (styles.css) é responsável por definir o estilo visual da página. Ele define o fundo, o estilo do cabeçalho, dos botões e faz ajustes para tornar o layout responsivo em telas menores.
+A primeira versão do código consiste nos seguintes arquivos:
 
-O JavaScript (alarm_clock.js) contém as funções necessárias para exibir a hora atual, definir e cancelar o alarme e implementar o recurso de soneca. Ele utiliza o objeto Date para obter a hora atual, compara a hora atual com o horário do alarme e reproduz um som quando são iguais. Além disso, o JavaScript manipula os elementos HTML da página para habilitar ou desabilitar os seletores de horário e o botão de soneca, de acordo com o estado do alarme.
+### index.html
 
-Este projeto é uma implementação simples de um despertador web e pode ser usado como ponto de partida para desenvolver recursos mais avançados, como diferentes opções de som, repetição de alarme e personalização do estilo visual.
+Este arquivo contém a estrutura HTML e os elementos da página, incluindo:
+
+- Um título para a página: "Alarm Clock WEB".
+- Um link para o arquivo de estilo CSS.
+- Um link para a fonte "Orbitron" do Google Fonts.
+- Um elemento `div` que exibe o relógio atual.
+- Um formulário de seleção de horas, minutos, segundos e AM/PM.
+- Dois botões, um para ativar/desativar o alarme e outro para adiar o alarme.
+- Um script que controla o comportamento do despertador.
+
+### styles.css
+
+Este arquivo contém estilos CSS para a página, incluindo:
+
+- Estilos para o corpo da página e o plano de fundo.
+- Estilos para o cabeçalho (`h1`).
+- Estilos para os botões.
+- Estilos para centralizar o conteúdo verticalmente e horizontalmente.
+- Estilos responsivos para ajustar o tamanho do texto e a aparência dos botões em telas menores.
+
+### alarm_clock.js
+
+Este arquivo contém o código JavaScript responsável por:
+
+- Exibir a hora atual no relógio.
+- Verificar se a hora atual corresponde ao alarme configurado e reproduzir um som.
+- Permitir adiar o alarme por 5 minutos.
+- Controlar a ativação/desativação do alarme.
+
+## Versão 2
+
+A segunda versão do código consiste nos seguintes arquivos:
+
+### index.html
+
+Este arquivo contém a estrutura HTML atualizada e elementos adicionais, incluindo:
+
+- Um novo título para a página: "Alarm-Clock Cruzeirao Cabuloso".
+- Um novo cabeçalho (`h1`) para exibir o título do despertador.
+- Um novo formulário e uma lista para exibir uma lista de alarmes configurados.
+- Dois elementos `div` para exibir modais: um para adicionar/editar alarmes e outro para exibir um alarme ativo.
+- Um rodapé para exibir o nome do autor.
+
+### styles.css
+
+Este arquivo contém estilos CSS atualizados para a nova versão, incluindo:
+
+- Estilos para o corpo da página e o plano de fundo, com a adição de uma imagem de fundo.
+- Estilos para o novo cabeçalho (`h1`).
+- Estilos para a lista de alarmes.
+- Estilos para os formulários modais e seus elementos.
+
+### alarm_clock.js
+
+Este arquivo contém o código JavaScript atualizado, que adiciona as seguintes funcionalidades:
+
+- Adicionar alarmes à lista de alarmes configurados.
+- Exibir o modal para adicionar/editar alarmes.
+- Exibir o modal quando um alarme é ativado.
+- Permitir o adiamento de alarmes e o cancelamento de alarmes ativados.
+
+## Contribuição
+
+Este repositório é apenas para fins educacionais e não aceita contribuições no momento.
+
+---

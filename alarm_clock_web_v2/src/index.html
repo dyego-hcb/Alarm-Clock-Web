@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alarm Clock WEB</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/6f260fee7a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title-clock">Alarm-Clock Cruzeirao Cabuloso</h1>
+    <h1 id="clock" class="clock"></h1>
+
+    <div class="alarm-form">
+      <button id="addAlarm">Add Alarm</button>
+    </div>
+
+    <h2>Alarm List</h2>
+    <ul id="alarmList" class="alarm-list"></ul>
+
+    <div id="alarmModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Add Alarm</h2>
+        <div class="modal-time">
+          <label for="hours">Hours:</label>
+          <input type="number" id="hours" min="0" max="23" />
+          <label for="minutes">Minutes:</label>
+          <input type="number" id="minutes" min="0" max="59" />
+          <label for="ampm">AM/PM:</label>
+          <select id="ampm">
+            <option value="am">AM</option>
+            <option value="pm">PM</option>
+          </select>
+        </div>
+        <div class="modal-repeat">
+          <label for="repeatType">Repeat:</label>
+          <select id="repeatType">
+            <option value="none">None</option>
+            <option value="everyday">Everyday</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div id="customDays" class="modal-days hide">
+          <label for="monday">Monday</label>
+          <input type="checkbox" id="monday" value="monday" />
+          <label for="tuesday">Tuesday</label>
+          <input type="checkbox" id="tuesday" value="tuesday" />
+          <label for="wednesday">Wednesday</label>
+          <input type="checkbox" id="wednesday" value="wednesday" />
+          <label for="thursday">Thursday</label>
+          <input type="checkbox" id="thursday" value="thursday" />
+          <label for="friday">Friday</label>
+          <input type="checkbox" id="friday" value="friday" />
+          <label for="saturday">Saturday</label>
+          <input type="checkbox" id="saturday" value="saturday" />
+          <label for="sunday">Sunday</label>
+          <input type="checkbox" id="sunday" value="sunday" />
+        </div>
+        <div class="modal-actions">
+          <button id="saveButton">Save</button>
+          <button id="cancelButton">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="alarmModalTrigger" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="alarmModalTriggerTitle">Alarm</h2>
+        <p id="alarmModalTriggerMensage">It's time to wake up!</p>
+        <div class="modal-actions">
+          <button id="snoozeButtonTrigger">Snooze</button>
+          <button id="cancelButtonTrigger">Cancel</button>
+        </div>
+      </div>
+    </div>    
+  </div>
+  <footer class="footer">
+    By: mr.zebodexxsz
+  </footer>  
+  <script src="../js/alarm_clock.js"></script>
+</body>
+</html>
