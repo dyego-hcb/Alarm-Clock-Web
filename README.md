@@ -49,6 +49,7 @@ Este arquivo contém a estrutura HTML atualizada e elementos adicionais, incluin
 - Um novo cabeçalho (`h1`) para exibir o título do despertador.
 - Um novo formulário e uma lista para exibir uma lista de alarmes configurados.
 - Dois elementos `div` para exibir modais: um para adicionar/editar alarmes e outro para exibir um alarme ativo.
+- Botões para alternar entre tema claro e escuro, e entre formato de hora AM/PM e 24 horas.
 - Um rodapé para exibir o nome do autor.
 
 ### styles.css
@@ -59,6 +60,8 @@ Este arquivo contém estilos CSS atualizados para a nova versão, incluindo:
 - Estilos para o novo cabeçalho (`h1`).
 - Estilos para a lista de alarmes.
 - Estilos para os formulários modais e seus elementos.
+- Estilos para suportar tema escuro.
+- Estilos para botões e outros elementos interativos.
 
 ### alarm_clock.js
 
@@ -68,6 +71,10 @@ Este arquivo contém o código JavaScript atualizado, que adiciona as seguintes 
 - Exibir o modal para adicionar/editar alarmes.
 - Exibir o modal quando um alarme é ativado.
 - Permitir o adiamento de alarmes e o cancelamento de alarmes ativados.
+- Alternar entre tema claro e escuro.
+- Alternar entre formato de hora AM/PM e 24 horas.
+- Configurar alarmes semanais que funcionam mesmo se a página não estiver em foco ou o PC estiver suspenso.
+- Notificações de alarme no navegador quando a página não está em foco.
 
 ## Contribuição
 

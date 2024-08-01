@@ -13,28 +13,38 @@ const customDays = document.getElementById("customDays");
 const snoozeButtonTrigger = document.getElementById("snoozeButtonTrigger");
 const cancelButtonTrigger = document.getElementById("cancelButtonTrigger");
 const modalElementAlarmTrigger = document.getElementById("alarmModalTrigger");
-
+const toggleThemeButton = document.getElementById("toggleTheme");
+const toggleTimeFormatButton = document.getElementById("toggleTimeFormat");
 
 let alarms = [];
-var sound = new Audio(
+let sound = new Audio(
   "https://freesound.org/data/previews/316/316847_4939433-lq.mp3"
 );
 sound.loop = true;
 
+let isDarkTheme = false;
+let is24HourFormat = false;
+
 function displayTime() {
   const now = new Date();
-  const hours = now.getHours();
+  let hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
-  clockElement.textContent = formatAMPM(hours, minutes, seconds);
+  clockElement.textContent = formatTime(hours, minutes, seconds);
 }
 
-function formatAMPM(hours, minutes, seconds) {
-  const ampm = hours >= 12 ? "PM" : "AM";
-  const formattedHours = padZero(hours % 12 || 12);
-  const formattedMinutes = padZero(minutes);
-  const formattedSeconds = padZero(seconds);
-  return `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`;
+function formatTime(hours, minutes, seconds) {
+  let formattedHours = hours;
+  let ampm = "";
+
+  if (!is24HourFormat) {
+    ampm = hours >= 12 ? "PM" : "AM";
+    formattedHours = hours % 12 || 12;
+  }
+
+  return `${padZero(formattedHours)}:${padZero(minutes)}:${padZero(seconds)} ${
+    ampm ? ampm : ""
+  }`;
 }
 
 function padZero(number) {
@@ -84,6 +94,7 @@ function saveAlarm() {
     ampm,
     repeatType,
     days,
+    id: Date.now(),
   };
 
   alarms.push(alarm);
@@ -95,12 +106,12 @@ function saveAlarm() {
 
 function scheduleAlarm(alarm) {
   const { hours, minutes, ampm, repeatType, days } = alarm;
-  const now = new Date();
-  const alarmTime = new Date(
+  let now = new Date();
+  let alarmTime = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    hours + (ampm === "pm" && hours !== 12 ? 12 : 0),
+    is24HourFormat ? hours : convertTo24Hour(hours, ampm),
     minutes
   );
 
@@ -117,14 +128,22 @@ function scheduleAlarm(alarm) {
       }
     }
   } else {
-    const alarmTimeMs = alarmTime.getTime();
-    const delay = alarmTimeMs - now.getTime();
-    if (delay > 0) {
-      setTimeout(() => {
-        playAlarm(alarm);
-      }, delay);
+    let delay = alarmTime.getTime() - now.getTime();
+    if (delay < 0) {
+      delay += 24 * 60 * 60 * 1000; // set for the next day
     }
+    setTimeout(() => {
+      playAlarm(alarm);
+    }, delay);
   }
+}
+
+function convertTo24Hour(hours, ampm) {
+  return ampm === "pm" && hours !== 12
+    ? hours + 12
+    : ampm === "am" && hours === 12
+    ? 0
+    : hours;
 }
 
 function playAlarm(alarm) {
@@ -153,7 +172,8 @@ function playAlarm(alarm) {
 
   modalElementAlarmTrigger.style.display = "block";
   document.getElementById("alarmModalTriggerTitle").textContent = "Alarm";
-  document.getElementById("alarmModalTriggerMensage").textContent = "🦊 It's time to wake up!";
+  document.getElementById("alarmModalTriggerMensage").textContent =
+    "🦊 It's time to wake up!";
 
   snoozeButtonTrigger.addEventListener("click", () => {
     const snoozeTime = 5 * 60 * 1000;
@@ -168,8 +188,7 @@ function playAlarm(alarm) {
 
   cancelButtonTrigger.addEventListener("click", () => {
     sound.pause();
-    if(alarm.repeatType === "none")
-    {
+    if (alarm.repeatType === "none") {
       deleteAlarm(alarms.indexOf(alarm));
     }
     modalElementAlarmTrigger.style.display = "none";
@@ -191,9 +210,9 @@ function renderAlarm(alarm) {
   const alarmRepeat = document.createElement("span");
   const deleteButton = document.createElement("button");
 
-  alarmTime.textContent = `🦊 ${alarms.indexOf(alarm) + 1} ${padZero(alarm.hours)}:${padZero(
-    alarm.minutes
-  )} ${alarm.ampm} `;
+  alarmTime.textContent = `🦊 ${alarms.indexOf(alarm) + 1} ${padZero(
+    alarm.hours
+  )}:${padZero(alarm.minutes)} ${alarm.ampm} `;
   alarmItem.appendChild(alarmTime);
 
   if (alarm.repeatType !== "none") {
@@ -221,10 +240,28 @@ function renderAlarms() {
   alarms.forEach((alarm) => renderAlarm(alarm));
 }
 
+function toggleTheme() {
+  isDarkTheme = !isDarkTheme;
+  document.body.classList.toggle("dark-theme", isDarkTheme);
+  document
+    .querySelector(".container")
+    .classList.toggle("dark-theme", isDarkTheme);
+}
+
+function toggleTimeFormat() {
+  is24HourFormat = !is24HourFormat;
+  const ampmLabel = document.querySelector(".ampm-label");
+  const ampmSelect = document.querySelector(".ampm-select");
+  ampmLabel.style.display = is24HourFormat ? "none" : "inline-block";
+  ampmSelect.style.display = is24HourFormat ? "none" : "inline-block";
+}
+
 addAlarmButton.addEventListener("click", openModal);
 closeButton.addEventListener("click", closeModal);
 saveButton.addEventListener("click", saveAlarm);
 cancelButton.addEventListener("click", closeModal);
+toggleThemeButton.addEventListener("click", toggleTheme);
+toggleTimeFormatButton.addEventListener("click", toggleTimeFormat);
 
 displayTime();
 setInterval(displayTime, 1000);

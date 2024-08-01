@@ -18,6 +18,11 @@
       <button id="addAlarm">Add Alarm</button>
     </div>
 
+    <div class="settings">
+      <button id="toggleTheme">Toggle Dark Theme</button>
+      <button id="toggleTimeFormat">Toggle 24hr/AM-PM</button>
+    </div>
+
     <h2>Alarm List</h2>
     <ul id="alarmList" class="alarm-list"></ul>
 
@@ -30,8 +35,8 @@
           <input type="number" id="hours" min="0" max="23" />
           <label for="minutes">Minutes:</label>
           <input type="number" id="minutes" min="0" max="59" />
-          <label for="ampm">AM/PM:</label>
-          <select id="ampm">
+          <label for="ampm" class="ampm-label">AM/PM:</label>
+          <select id="ampm" class="ampm-select">
             <option value="am">AM</option>
             <option value="pm">PM</option>
           </select>
